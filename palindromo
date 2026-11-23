@@ -1,0 +1,22 @@
+; Palindromo - minha versão :) 
+
+start _ * * halt-accept
+start 1 _ r procuraDireita1
+start 0 _ r procuraDireita0
+
+procuraDireita0 * * r procuraDireita0
+procuraDireita0 _ _ l fimDireita0
+
+fimDireita0 1 * * halt-reject
+fimDireita0 _ _ * halt-accept
+fimDireita0 * _ l volta
+
+procuraDireita1 * * r procuraDireita1
+procuraDireita1 _ _ l fimDireita1
+
+fimDireita1 0 * * halt-reject
+fimDireita1 _ _ * halt-accept
+fimDireita1 * _ l volta
+
+volta * * l volta
+volta _ * r start
