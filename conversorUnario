@@ -1,0 +1,16 @@
+; Converte de binário para unário
+start * * r start
+start _ # l decrementaB
+
+decrementaB 0 1 l decrementaB
+decrementaB 1 0 r fim
+decrementaB _ _ r apagaB
+
+fim * * r fim
+fim _ 1 l voltaB
+
+voltaB * * l voltaB
+voltaB # * l decrementaB
+
+apagaB * _ r apagaB
+apagaB # _ r halt
