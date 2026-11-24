@@ -1,0 +1,44 @@
+start _ _ r start
+start ( $ r procuraP
+start $ $ r procuraP
+start [ # r procuraC
+start # # r procuraC
+start v v r procuraDireita
+
+
+
+; Procura pelo fim parenteses
+procuraP ) v l voltaP
+procuraP [ # r procuraC 
+procuraP ] # r halt-reject
+procuraP v * r procuraP
+procuraP ( $ r procuraP
+procuraP _ * l halt-reject
+
+voltaP * * l voltaP
+voltaP $ v l procuraIncompleto
+
+
+; Procura pelo fim colchetes
+procuraC ] v l voltaC
+procuraC ( $ r procuraP
+procuraC ) # r halt-reject
+procuraC [ # r procuraC
+procuraC v * r procuraC
+procuraC _ * l halt-reject
+
+voltaC * * l voltaC
+voltaC # v l procuraIncompleto
+
+procuraIncompleto v * l procuraIncompleto
+procuraIncompleto $ * r procuraP
+procuraIncompleto # * r procuraC
+procuraIncompleto _ _ r procuraDireita
+
+procuraDireita v * r procuraDireita
+procuraDireita ( $ r procuraP
+procuraDireita [ # r procuraC 
+procuraDireita _ * l halt-accept
+procuraDireita ] * l halt-reject
+procuraDireita ) * l halt-reject
+
