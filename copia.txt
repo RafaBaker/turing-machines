@@ -1,0 +1,25 @@
+start * * r start
+start _ # l volta
+
+volta * * l volta
+volta _ * r s1
+volta o * r s1
+volta l * r s1
+
+s1 0 o r copia0
+s1 1 l r copia1
+s1 # * l voltaE
+
+copia0 * * r copia0
+copia0 _ 0 l volta
+
+copia1 * * r copia1
+copia1 _ 1 l volta
+
+voltaE * * l voltaE
+voltaE _ * r reescreve
+
+reescreve o 0 r reescreve
+reescreve l 1 r reescreve
+reescreve * * r reescreve
+reescreve _ * l halt-accept
