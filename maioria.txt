@@ -1,0 +1,30 @@
+; Problema Maioria. Estado inicial 0 (start na versão original).
+; Para uma entrada de tamanho n com u uns, compara n com 2u + 1.
+
+0 * * r 0
+0 _ # r adicionaFim2
+
+volta * * l volta
+volta 0 $ l volta
+volta 1 $ r adicionaFim
+volta _ * r confere1
+
+adicionaFim * * r adicionaFim
+adicionaFim _ $ r adicionaFim2
+adicionaFim2 _ $ l volta
+
+confere1 $ _ r confere2
+confere1 # _ r accept
+confere2 * * r confere2
+confere2 _ * l confere3
+confere3 $ _ l confere4
+confere4 # * l igual
+confere4 * * l volta
+
+igual _ _ r accept
+igual $ 0 r reject
+
+accept * _ r accept
+accept _ 1 * halt-accept
+reject * _ l reject
+reject _ 0 * halt-reject
