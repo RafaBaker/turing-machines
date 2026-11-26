@@ -1,0 +1,40 @@
+; Thue Morse
+
+0 * * r 0
+0 _ # r start1
+
+start1 _ 0 l start2
+start2 * * l start2
+start2 _ * r start3
+start3 0 _ r start3
+start3 1 _ r avancaBloco
+start3 # _ r reescreve
+
+avancaBloco * * r avancaBloco
+avancaBloco # * r marcaString
+
+marcaString 0 o r marcaString
+marcaString 1 l r marcaString
+marcaString _ * l volta#R
+
+volta#R * * l volta#R
+volta#R # * r adicionaInverso
+
+adicionaInverso * * r adicionaInverso
+adicionaInverso _ * l volta#L
+adicionaInverso o 0 r adiciona1
+adicionaInverso l 1 r adiciona0
+
+adiciona0 * * r adiciona0
+adiciona0 _ 0 l volta#R
+
+adiciona1 * * r adiciona1
+adiciona1 _ 1 l volta#R
+
+volta#L * * l volta#L
+volta#L # * l start2
+
+reescreve o 0 r reescreve
+reescreve l 1 r reescreve
+reescreve * * r reescreve
+reescreve _ _ l halt-accept
