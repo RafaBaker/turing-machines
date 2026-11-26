@@ -1,0 +1,56 @@
+; MDC EUCLIDES
+
+voltaL * * l *
+voltaL _ * r 0
+
+; Confere se x é diferente de y
+00 * * r 0
+0 1 $ r 01
+0 # * r checaY
+01 * * r 01
+01 _ * l 02
+01 $ * l 02
+02 1 $ l 03
+02 # * r subtraiX 
+03 # * l checaX
+03 1 * l 04
+04 * * l 04
+04 $ * r 0
+
+; Vê se y>0
+checaY $ * l iguais0
+checaY 1 * l subtraiY
+
+; Vê se x>0
+checaX $ * r iguais0
+checaX 1 * r subtraiX
+
+; Subrotina para subtrair x (e formatar y novamente)
+subtraiX * * r *
+subtraiX _ * l subtraiX1
+subtraiX1 $ 1 l subtraiX2
+subtraiX1 1 * l subtraiX1
+subtraiX2 * * l *
+subtraiX2 _ * r subtraiX3
+subtraiX3 $ _ r subtraiX4
+subtraiX4 $ * r subtraiX
+subtraiX4 1 * r voltaL
+
+; Subrotina para subtrair y (e formatar x novamente)
+subtraiY * * l *
+subtraiY _ * r subtraiY1
+subtraiY1 $ 1 r subtraiY2
+subtraiY1 1 * r subtraiY1
+subtraiY2 * * r *
+subtraiY2 _ * l subtraiY3
+subtraiY3 $ _ l subtraiY4
+subtraiY4 $ * l subtraiY
+subtraiY4 1 * l voltaL
+
+; Limpa a string para imprimir o resultado (x)
+iguais0 * * l *
+iguais0 _ * r iguais1
+iguais1 $ 1 r iguais1
+iguais1 # _ r iguais2
+iguais2 * _ r iguais2
+iguais2 _ * l halt-accept
