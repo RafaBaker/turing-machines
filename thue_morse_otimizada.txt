@@ -1,0 +1,35 @@
+; Thue-Morse para o simulador Morphett
+; A entrada tem n símbolos 1. A fita vazia representa a ordem zero.
+
+0 * * r 0
+0 _ # r start1
+start1 _ 0 l start2
+
+start2 * * l start2
+start2 _ * r start3
+start3 0 _ r start3
+start3 1 _ r avancaBloco
+start3 # _ r halt-accept
+
+avancaBloco * * r avancaBloco
+avancaBloco # * r marcaString
+
+; Marca os bits do bloco original antes de acrescentar o complemento.
+marcaString 0 o r marcaString
+marcaString 1 l r marcaString
+marcaString _ * l volta#R
+
+; A e B guardam a posição e o valor do bit que está sendo copiado.
+volta#R # * r adicionaInverso
+volta#R A 0 r adicionaInverso
+volta#R B 1 r adicionaInverso
+volta#R * * l volta#R
+
+adicionaInverso o A r adiciona1
+adicionaInverso l B r adiciona0
+adicionaInverso * * l start2
+
+adiciona0 * * r adiciona0
+adiciona0 _ 0 l volta#R
+adiciona1 * * r adiciona1
+adiciona1 _ 1 l volta#R
